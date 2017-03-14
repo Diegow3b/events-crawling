@@ -2,9 +2,10 @@
   "name": "events-server",
   "version": "0.0.0",
   "description": "Node/Express Server to Events Project",
-  "main": "app.js",
+  "main": "app.js",  
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon bin/www"
   },
   "repository": {
     "type": "git",
