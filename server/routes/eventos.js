@@ -8,7 +8,7 @@ router.route('/eventos')
     .get((req, res) => {        
         db.eventos.find((err, eventos) => {
             if(err) throw err;
-            res.json(eventos);
+            res.json(eventos);            
         });
     });
 
@@ -28,14 +28,15 @@ router.route('/evento/:id')
     .put((req, res) => {
         var evento = req.body;
         var updEvento = {};
+        // Adicionar e teste o underscore _.extend()
+        
+        // if(evento.isDone){
+        //     updEvento.isDone = evento.isDone;
+        // }
 
-        if(evento.isDone){
-            updEvento.isDone = evento.isDone;
-        }
-
-        if(evento.title){
-            updEvento.title = evento.title;
-        }
+        // if(evento.title){
+        //     updEvento.title = evento.title;
+        // }
 
         if(!updEvento){
             res.status(400);

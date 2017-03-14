@@ -1,0 +1,3 @@
+{"_id":{"$oid":"58c82843734d1d6351027c76"},"username":"admin","password":"","email":"admin@admin.com","is_staff":"true","group_id":""}
+{"_id":{"$oid":"58c82881734d1d6351027cd9"},"username":"employee","password":"","email":"employee@employee.com","is_staff":"true","group_id":""}
+{"_id":{"$oid":"58c828a3734d1d6351027cdf"},"username":"client","password":"","email":"client@client.com","is_staff":"false","group_id":""}
