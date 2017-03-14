@@ -1,8 +1,19 @@
 var express = require('express');
 var mongojs = require('mongojs');
 
-var router = express.Router();
-var db = mongojs('mongodb://admin:123@ds131340.mlab.com:31340/eventos', ['eventos']);
+const router = express.Router();
+var db = mongojs('mongodb://admin:123@ds131340.mlab.com:31340/eventos', ['users']);
+
+var isValid = (req) => {
+    const control = ['title', 'location', 'start_date', 'description'];
+    let validator = true;
+
+    control.forEach((arg) => {     
+        if (validator && !req.body[arg]) validator = false
+    });
+
+    return validator;
+};
 
 router.route('/eventos')
     .get((req, res) => {        
@@ -25,47 +36,36 @@ router.route('/evento/:id')
             res.json(evento);
         });
     })
-    .put((req, res) => {
+    .put((req, res, next) => {
         var evento = req.body;
-        var updEvento = {};
-        // Adicionar e teste o underscore _.extend()
         
-        // if(evento.isDone){
-        //     updEvento.isDone = evento.isDone;
-        // }
-
-        // if(evento.title){
-        //     updEvento.title = evento.title;
-        // }
-
-        if(!updEvento){
-            res.status(400);
-            res.json({
-                "error": "Bad Data"
-            });
-        }else{
-            db.eventos.update({ _id: mongojs.ObjectId(req.params.id) },
-                            updEvento, {}, (err, evento) => {
+        if(!isValid(req)){
+            return next(res.status(400).json({"error": "Bad Data"}));
+        }
+        
+        db.eventos.update({ _id: mongojs.ObjectId(req.params.id) }, 
+            evento, {}, (err, evento) => {
                 if(err) throw err;
                 res.json(evento);
-            });
-        }        
+        });
+                
     });
 
 router.route('/evento')
-    .post((req, res) => {
+    .post((req, res, next) => {
         var evento = req.body;
-        if(!evento.title || !(evento.isDone + '')){
-            res.status(400);
-            res.json({
-                "error": "Bad Data"
-            });
-        }else{
-            db.eventos.save(evento, (err, evento) => {
+
+        if(!isValid(req)){
+            return next(res.status(400).json({"error": "Bad Data"}));
+        }
+
+        if (!evento.end_date) evento.end_date = evento.start_date;
+        
+        db.eventos.update({ _id: mongojs.ObjectId(req.params.id) }, 
+            evento, {}, (err, evento) => {
                 if(err) throw err;
                 res.json(evento);
-            });
-        }
+        });
     });
 
 module.exports = router;
