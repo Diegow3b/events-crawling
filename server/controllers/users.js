@@ -1,21 +1,32 @@
 var bcrypt = require('bcrypt');
 
-exports.cryptPassword = function(password, callback) {
-   bcrypt.genSalt(10, function(err, salt) {
+exports.cryptPassword = (password, callback) => {
+   bcrypt.genSalt(10, (err, salt) => {
     if (err) 
       return callback(err);
 
-    bcrypt.hash(password, salt, function(err, hash) {
+    bcrypt.hash(password, salt, (err, hash) => {
       return callback(err, hash);
     });
 
   });
 };
 
-exports.comparePassword = function(password, userPassword, callback) {
-   bcrypt.compare(password, userPassword, function(err, isPasswordMatch) {
+exports.comparePassword = (password, userPassword, callback) => {
+   bcrypt.compare(password, userPassword, (err, isPasswordMatch) => {
       if (err) 
         return callback(err);
       return callback(null, isPasswordMatch);
    });
+};
+
+exports.isValid = (req) => {
+    const control = ['username', 'password', 'email'];
+    let validator = true;
+
+    control.forEach((arg) => {     
+        if (validator && !req.body[arg]) validator = false
+    });
+
+    return validator;
 };
