@@ -1,11 +1,12 @@
 var express = require('express');
 var mongojs = require('mongojs');
+var encrypt = require('../controllers/users')
 
 const router = express.Router();
 var db = mongojs('mongodb://admin:123@ds131340.mlab.com:31340/eventos', ['users']);
 
 var isValid = (req) => {
-    const control = ['title', 'location', 'start_date', 'description'];
+    const control = ['username', 'password', 'email'];
     let validator = true;
 
     control.forEach((arg) => {     
@@ -16,58 +17,68 @@ var isValid = (req) => {
 };
 
 /**
- * Eventos Router
+ * Users Router
  */
+
 router.route('/')
     .get((req, res) => {        
-        db.eventos.find((err, eventos) => {
+        db.users.find((err, users) => {
             if(err) throw err;
-            res.json(eventos);            
+            users.forEach((user)=>{
+                delete user.password;
+            });            
+            res.json(users);            
         });
     })
     .post((req, res, next) => {
-        var evento = req.body;
+        var user = req.body;
 
         if(!isValid(req)){
             return next(res.status(400).json({"error": "Bad Data"}));
         }
 
-        if (!evento.end_date) evento.end_date = evento.start_date;
-        
-        db.eventos.save(evento, function(err, evento){
+        if (!user.end_date) user.end_date = user.start_date;
+
+        encrypt.cryptPassword(user.password, (err, password) => {
             if(err) throw err;
-            res.json(evento);
+            user.password = password;
         });
         
+        db.users.save(user, function(err, user){
+            if(err) throw err;
+            res.json(user);
+        });
     });
 
 router.route('/:id')
     .get((req, res) => {        
-        db.eventos.findOne({ _id: mongojs.ObjectId(req.params.id) },(err, evento) => {
+        db.users.findOne({ _id: mongojs.ObjectId(req.params.id) },(err, user) => {
             if(err) throw err;
-            res.json(evento);
+            users.forEach((user)=>{
+                delete user.password;
+            });
+            res.json(user);
         });
     })
     .delete((req, res) => {
-        db.eventos.remove({ _id: mongojs.ObjectId(req.params.id) },(err, evento) => {
+        db.users.remove({ _id: mongojs.ObjectId(req.params.id) },(err, user) => {
             if(err) throw err;
-            res.json(evento);
+            res.json(user);
         });
     })
     .put((req, res, next) => {
-        var evento = req.body;
+        var user = req.body;
         
         if(!isValid(req)){
             return next(res.status(400).json({"error": "Bad Data"}));
         }
         
-        db.eventos.update({ _id: mongojs.ObjectId(req.params.id) }, 
-            evento, {}, (err, evento) => {
+        db.users.update({ _id: mongojs.ObjectId(req.params.id) }, 
+            user, {}, (err, user) => {
                 if(err) throw err;
-                res.json(evento);
+                res.json(user);
         });
                 
     });
-    
 
 module.exports = router;
