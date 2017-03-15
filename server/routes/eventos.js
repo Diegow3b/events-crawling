@@ -1,18 +1,8 @@
 var express = require('express');
-var model = require('../models/eventos.js');
+var model = require('../models/eventos');
+var controller = require('../controllers/eventos');
 
 const router = express.Router();
-
-var isValid = (req) => {
-    const control = ['title', 'location', 'start_date', 'description'];
-    let validator = true;
-
-    control.forEach((arg) => {     
-        if (validator && !req.body[arg]) validator = false
-    });
-
-    return validator;
-};
 
 /**
  * Eventos Router
@@ -29,7 +19,7 @@ router.route('/')
     .post((req, res, next) => {
         var evento = req.body;
 
-        if(!isValid(req)){
+        if(!controller.isValid(req)){
             return next(res.status(400).json({"error": "Bad Data"}));
         }
 
@@ -61,7 +51,7 @@ router.route('/:id')
     .put((req, res, next) => {
         var evento = req.body;
         
-        if(!isValid(req)){
+        if(!controller.isValid(req)){
             return next(res.status(400).json({"error": "Bad Data"}));
         }
         

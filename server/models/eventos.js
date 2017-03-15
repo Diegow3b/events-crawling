@@ -45,6 +45,10 @@ exports.remove = (id, callback) => {
     });
 };
 
+
+/**
+ * Update one object from database
+ */
 exports.update = (id, evento, callback) => {    
     db.eventos.update({ _id: mongojs.ObjectId(id) }, evento, {},(err, evento) => {
         if (err) 
