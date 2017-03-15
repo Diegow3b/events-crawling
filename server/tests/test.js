@@ -1,5 +1,6 @@
 var request = require('supertest');
 var app = require('./../app');
+var model = require('../models/eventos');  
 
 var tearDown = () => {
     // FlushDB
@@ -32,6 +33,16 @@ describe('Requests to the root path', () => {
  * Api Eventos Test
  */
 describe('Listing eventos on api/eventos', () => {
+
+    after(() => {        
+        model.filterByTitle('unit_api_test_post', (err, evento) => {
+            if(err) throw err;
+            model.removeByTitle('unit_api_test_post', (err, evento) => {
+                if(err) throw err;
+            });
+        });
+    });
+
     it('Return 200 status code', (done) => {
         request(app)
             .get('/api/eventos')
@@ -43,16 +54,50 @@ describe('Listing eventos on api/eventos', () => {
             .get('/api/eventos')
             .expect('Content-Type', /json/, done);            
     });
-    
+
+    it('Returns a single Evento', (done) => {
+        request(app)
+            .get('/api/eventos/58c81453734d1d6351026a1b')            
+            .expect((res) => {
+                res.body._id, '58c81453734d1d6351026a1b';
+                res.body.title, 'ROUTE 303 STAGE';
+            })
+            .expect(200, done);
+    });
+
+    // it('Validades evento mandatory attributes (title, location, start_date, description)',(done) => {
+
+    it('Return 201 status code',(done) => {
+        request(app)
+            .post('/api/eventos')
+            .send({
+                "title": "unit_api_test_post",
+                "location": "any location",
+                "start_date": "01 January 1970",
+                "description": "Lorem Ipsum",
+                "producer": "The Producer"
+            })
+            .expect(201, done);
+    });
+
     /**
      * TODO:
-        * GET on Single Object
-        * POST
         * PUT
         * DELETE
      */
     
 });
+
+describe('Listing users on api/users/name', () => {
+
+    it('Return 200 status code', (done) => {
+        request(app)
+            .get('/api/eventos/name/route-303-stage')
+            .expect(200, done);
+    });
+
+});
+
 
 /**
  * Api Users Test
