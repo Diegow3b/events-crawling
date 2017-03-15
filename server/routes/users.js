@@ -67,4 +67,13 @@ router.route('/:id')
                 
     });
 
+router.route('/name/:slug')
+
+    .get((req, res) => {                
+        model.filterBySlug(req.params.slug, (err, user) => {
+            if(err) throw err;
+            res.json(user);
+        });
+    })
+
 module.exports = router;

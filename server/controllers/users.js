@@ -21,7 +21,7 @@ exports.comparePassword = (password, userPassword, callback) => {
 };
 
 exports.isValid = (req) => {
-    const control = ['username', 'password', 'email'];
+    const control = ['username', 'fullName', 'password', 'email'];
     let validator = true;
 
     control.forEach((arg) => {     

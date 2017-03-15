@@ -27,7 +27,7 @@ router.route('/')
 
         model.insert(evento, (err, evento) => {
             if(err) throw err;
-            res.json(evento);
+            res.status(201).json(evento);
         });
 
     });
@@ -44,7 +44,7 @@ router.route('/:id')
     .delete((req, res) => {
         model.remove(req.params.id, (err, evento) => {
             if(err) throw err;
-            res.json(evento);
+            res.sendStatus(204);
         });
     })
 
@@ -62,5 +62,13 @@ router.route('/:id')
                 
     });
     
+router.route('/name/:slug')
+
+    .get((req, res) => {            
+        model.filterBySlug(req.params.slug, (err, user) => {
+            if(err) throw err;
+            res.json(user);
+        });
+    })
 
 module.exports = router;
