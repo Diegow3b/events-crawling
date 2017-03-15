@@ -45,3 +45,21 @@ describe('Listing eventos on api/eventos', () => {
     });
     
 });
+
+/**
+ * Api Users Test
+ */
+describe('Listing users on api/users', () => {
+    it('Return 200 status code', (done) => {
+        request(app)
+            .get('/api/users')
+            .expect(200, done);
+    });
+
+    it('Return JSON format', (done) => {
+        request(app)
+            .get('/api/users')
+            .expect('Content-Type', /json/, done);            
+    });
+    
+});
