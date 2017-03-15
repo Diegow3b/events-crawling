@@ -44,6 +44,14 @@ describe('Listing eventos on api/eventos', () => {
             .expect('Content-Type', /json/, done);            
     });
     
+    /**
+     * TODO:
+        * GET on Single Object
+        * POST
+        * PUT
+        * DELETE
+     */
+    
 });
 
 /**
@@ -61,5 +69,16 @@ describe('Listing users on api/users', () => {
             .get('/api/users')
             .expect('Content-Type', /json/, done);            
     });
+
+    /**
+     * TODO:
+        * GET on Single Object
+        * POST
+        * PUT
+        * DELETE
+        * AUTHENTICATION
+        * COMPARING PASSWORD
+        * HASING PASSWORD
+     */
     
 });
