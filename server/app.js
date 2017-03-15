@@ -16,6 +16,12 @@ var app = express();
 app.use(cors());
 
 /**
+ * Logger
+ */
+var logger = require('./logger');
+app.use(logger);
+
+/**
  * Defining Sessions
  */
 app.use(session({ 
