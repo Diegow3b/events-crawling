@@ -6,6 +6,8 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { EventosComponent } from './eventos/eventos.component';
 
+import { EventosService } from './services/eventos.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +18,7 @@ import { EventosComponent } from './eventos/eventos.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers:[EventosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
