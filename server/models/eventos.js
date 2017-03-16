@@ -83,7 +83,8 @@ exports.removeByTitle = (title, callback) => {
 /**
  * Update one object from database
  */
-exports.update = (id, evento, callback) => {    
+exports.update = (id, evento, callback) => {
+    if (evento._id) delete evento._id;
     db.eventos.update({ _id: mongojs.ObjectId(id) }, evento, {},(err, evento) => {
         if (err) 
             return callback(err);
