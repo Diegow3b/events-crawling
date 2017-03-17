@@ -50,3 +50,75 @@ img {
     border: 2px solid #19bbf5;
     border-radius: 50%;
 }
+
+/* BUTTONS */
+.btn, a.btn, a.btn:visited, a.btn:link {
+    font-family: 'Open Sans', 'Raleway', sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-shadow: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    color: #FFF;
+    border-radius: 4px;
+    padding: 12px 22px;
+    outline: 0 !important;
+    margin: 5px 10px 5px 0;
+    -webkit-transition: background-color 0.25s;
+    -moz-transition: background-color 0.25s;
+    -o-transition: background-color 0.25s;
+    transition: background-color 0.25s;
+    text-decoration: none;
+}
+
+.btn-white-transparent:hover, .btn-white-transparent:focus, a.btn-white-transparent:hover, a.btn-white-transparent:focus {
+    background-color: #00aeef !important;
+    color: #fff !important;
+    border-color: #00aeef !important;
+}
+
+a.btn-outline, .btn-outline, a.btn-outline:link {
+    border: 1px solid;
+    background-color: transparent;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -moz-background-clip: border;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    font-weight: normal;
+}
+
+.btn.btn-outline, a.btn.btn-outline {
+    padding: 13px 30px;
+    font-family: 'Open Sans', 'Raleway', sans-serif;
+}
+
+li.btn-fill-white, .btn-fill-white a {
+    color: #00aeef !important;
+}
+
+.btn-fill-white {
+    background: #fff !important;
+}
+
+/** FOTER **/
+
+.footer a, .footer a:link, .footer a:visited {
+    text-decoration: none;
+    color: #BBB;
+    outline: 0;
+}
+
+.footer ul {
+    list-style: none;
+    margin: 15px 0 15px 0;
+    line-height: 26px;
+    padding: 0;
+}
