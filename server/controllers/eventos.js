@@ -1,5 +1,5 @@
 exports.isValid = (req) => {
-    const control = ['title', 'location', 'start_date', 'description'];
+    const control = ['title', 'location', 'city', 'start_date', 'description'];
     let validator = true;
 
     control.forEach((arg) => {     
