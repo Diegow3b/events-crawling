@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EventosService } from '../services/eventos.service';
 import { Evento } from '../../../class/evento';
 
+import { DomSanitizer } from '@angular/platform-browser';
+
 @Component({
     selector: 'app-eventos',
     templateUrl: './eventos.component.html',
@@ -17,21 +19,34 @@ export class EventosComponent implements OnInit {
     end_date: string;
     slug: string;
     description: string;
+    imagem: string;
 
-    constructor(private eventosService: EventosService) {
+    defaultImage: string;
+
+    constructor(private eventosService: EventosService, private sanitizer: DomSanitizer) {
         this.eventosService.getEventos()
             .subscribe(eventos => {
                 this.eventos = eventos;
             });
+
+        this.defaultImage = 'https://d1gkntzr8mxq7s.cloudfront.net/58c9e8b1161a2-xs.jpg';
     }
 
-    limparForm(){
-      this.title = '';
-      this.location = '';
-      this.start_date = '';
-      this.end_date = '';
-      this.slug = '';
-      this.description = '';
+    sanitizeSafeStyle(url: string) {
+        if(url) {
+            return this.sanitizer.bypassSecurityTrustStyle('url(' + url + ')');
+        } else {
+            return null;
+        }
+    }
+
+    limparForm() {
+        this.title = '';
+        this.location = '';
+        this.start_date = '';
+        this.end_date = '';
+        this.slug = '';
+        this.description = '';
     }
 
     addEvento(event) {
@@ -42,7 +57,8 @@ export class EventosComponent implements OnInit {
             start_date: this.start_date,
             end_date: this.end_date,
             slug: this.slug,
-            description: this.description
+            description: this.description,
+            imagem: this.imagem
         }
 
         this.eventosService.addEvento(newEvento)
@@ -73,7 +89,8 @@ export class EventosComponent implements OnInit {
             start_date: this.start_date,
             end_date: this.end_date,
             slug: this.slug,
-            description: this.description
+            description: this.description,
+            imagem: this.imagem
         };
         this.eventosService.updateEvento(_evento)
             .subscribe(data => {

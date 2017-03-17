@@ -1,7 +1,57 @@
-<div class="container">
-    <h1>
-        {{title}}
-    </h1>
-    <hr>
-    <app-eventos></app-eventos>
+<header>
+  <div class="navbar navbar-fixed-top box">
+    <div class="row">
+      <div class="col-xs-5 visible-lg">
+        <div class="input-group input-search" id="input-search-navbar">
+          <i class="fa fa-search"></i>
+          <input type="text" class="form-control" placeholder="Digite ou selecione uma categoria" id="tags" name="tags" autocomplete="off">
+        </div>
+      </div>
+      <div class="col-xs-4 col-md-3 col-lg-2 logo">
+        <!--<a class="navbar-brand" href="#">Eventos</a>-->
+        <a href="/home/">
+            <img src="../src/static/logo.png" alt="logo Angular" class="logo">
+        </a>
+      </div>
+      <div class="hidden-sm col-md-4 col-lg-2"></div>
+      <div class="hidden-xs col-xs-8 col-sm-8 col-md-5 col-lg-3">
+        <nav class="navbar nav">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Contato</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="mobile-nav col-xs-1 visible-xs">
+        <div class="menu-btn" id="menu-btn" [class.btn-none]="isMenuActive" (click)="activeMenu()">
+          <div></div>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="responsive-menu" [class.expand]="isMenuActive">
+            <ul>
+              <li><a href="#">Login</a></li>
+              <li><a href="#">Sobre</a></li>
+              <li><a href="#">Contato</a></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+  </div>
+</header>
+<div class="container-fluid" style="padding-top: 73px">
+  <app-eventos></app-eventos>
+
+
+  <!--<aside>
+    <h2>About section</h2>
+    <p>Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+  </aside>-->
+
+  <footer>
+    <p>Copyright 2009 Your name</p>
+  </footer>
 </div>
