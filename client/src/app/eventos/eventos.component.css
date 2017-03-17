@@ -1,3 +1,59 @@
+select.form-control {
+  -moz-appearance: none;
+   -webkit-appearance: none;
+   appearance: none;
+}
+
+.dropdown-menu {
+    box-shadow: none;
+    font-size: 10px;
+    text-transform: uppercase;
+    border-radius: 0;
+    background-color: #FFF !important;
+    color: #777;
+    border-top: none;
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu > li > a {
+    padding: 15px;
+    color: #777;
+    font-weight: 400;
+    background-color: #FFF;
+    text-transform: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.searchDate button {
+  height: 40px;
+  width: 100%;
+  background-color: #fff;
+  border-color: #ccc;
+  color: #50525f;
+  border-width: 1px 0 1px 1px;
+  border-style: solid;
+  border-radius: 0;
+  text-align: left;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  font-weight: normal;
+  font-size: 14px;
+  padding: 8px 10px;
+}
+
+.searchDate ul {
+  width: 100%;
+}
+
+.searchDate a:hover {
+  color: #00aeef !important;
+}
+
 .searchBox {
   height: 147px;
   background-color: #f8f8f8;
@@ -28,7 +84,7 @@
   color: #c5d0df;
 }
 
-.searchBox .btn {
+.search-input {
   color: #fff;
   background-color: #ff6262;
   border-color: #ff6262;
@@ -37,7 +93,7 @@
   letter-spacing: 2px;
 }
 
-.searchBox .btn:hover {
+.search-input:hover {
   color: #fff;
   background-color: #ff4f4f;
   border-color: #ff4f4f;
@@ -45,12 +101,22 @@
 
 
 /* EVENTO SECTION*/
+.form-horizontal .fa-caret-down {
+    position: absolute;
+    right: 13px;
+    top: 39px;
+    font-size: 12px;
+    color: #000;
+}
+
 .header-evento div{
   height: 74px;
 }
 
 .header-evento select {
-  width: 183px;
+  width: 100px;
+  height: 29px;
+  padding: 1px 10px;
   float: right;
   margin-top: 30px;
 }
@@ -58,6 +124,7 @@
 .header-evento label {
   position: absolute;
   top: 29px;
+  right: 105px;
 }
 
 .header-evento h3 {
@@ -176,12 +243,17 @@
   width: 337px;
   height: 45px;
   border-width: 1px;
-  border-radius: 2px;
+  border-radius: 3px;
   border-color: #000;
   text-transform: uppercase;
   color: #000;
   background-color: #fff;
   transition: background-color 0.5s ease;
+  font-weight: normal;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  box-shadow: none;
+  outline: 0 !important;
 }
 
 .load-more:hover {

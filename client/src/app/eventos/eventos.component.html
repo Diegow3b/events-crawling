@@ -13,11 +13,28 @@
       </div>
 
       <div class="col-lg-2">
-        <input class="form-control" type="text" placeholder="Todas as datas">
-        <i class="fa fa-caret-down" aria-hidden="true"></i>
+        <div class="searchDate">
+
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span id="searchForData">
+                Todas as datas
+              </span>
+          </button>
+          <ul class="dropdown-menu" id="dropdownMenuDates">
+              <li><a data-period="">Todas as datas</a></li>
+              <li><a data-period="hoje">Hoje</a></li>
+              <li><a data-period="amanha">Amanhã</a></li>
+              <li><a data-period="esta-semana">Esta semana</a></li>
+              <li><a data-period="este-fim-de-semana">Este fim de semana</a></li>
+              <li><a data-period="proxima-semana">Próxima semana</a></li>
+              <li><a data-period="este-mes">Este mês</a></li>
+          </ul>
+
+          <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </div>
       </div>
       <div class="col-lg-2">
-        <input type="submit" class="btn btn-danger" value="PROCURAR">
+        <input type="submit" class="btn btn-danger search-input" value="PROCURAR">
       </div>
 
     </div>
@@ -43,10 +60,11 @@
               <label class="control-label"><strong>Ordernar Por:</strong></label>
               <div class="selectContainer">
                 <select name="orderBy" class="form-control">
-                        <option value="data" selected>Data</option>
-                        <option value="relevancia">Relevância</option>
-                    </select>
+                  <option value="data" selected>Data</option>
+                  <option value="relevancia">Relevância</option>
+                </select>
               </div>
+              <i class="fa fa-caret-down" aria-hidden="true"></i>
             </div>
 
           </form>
