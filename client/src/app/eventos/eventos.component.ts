@@ -12,6 +12,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class EventosComponent implements OnInit {
 
     eventos: Evento[];
+    eventosQuant: number;
+
     _id: string;
     title: string;
     location: string;
@@ -27,6 +29,7 @@ export class EventosComponent implements OnInit {
         this.eventosService.getEventos()
             .subscribe(eventos => {
                 this.eventos = eventos;
+                this.eventosQuant = eventos.length;
             });
 
         this.defaultImage = 'https://d1gkntzr8mxq7s.cloudfront.net/58c9e8b1161a2-xs.jpg';

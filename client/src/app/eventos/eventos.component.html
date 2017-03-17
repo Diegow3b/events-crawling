@@ -31,7 +31,8 @@
       <div class="header-evento">
 
         <div class="col-lg-9">
-          <h3><strong>33</strong> eventos encontrados em <strong>Salvador</strong></h3>
+          <h3 *ngIf="eventosQuant"><strong>{{eventosQuant}}</strong> eventos encontrados em <strong>Salvador</strong></h3>
+          <h3 *ngIf="!eventosQuant"><strong>Nenhum</strong> eventos encontrados em <strong>Salvador</strong></h3>
         </div>
 
         <div class="col-lg-3">
