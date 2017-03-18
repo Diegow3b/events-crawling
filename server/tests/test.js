@@ -35,9 +35,9 @@ describe('Requests to the root path', () => {
 describe('Listing eventos on api/eventos', () => {
 
     after(() => {        
-        model.filterByTitle('unit_api_test_post', (err, evento) => {
+        model.filter({ title: 'unit_api_test_post' }, (err, evento) => {
             if(err) throw err;
-            model.removeByTitle('unit_api_test_post', (err, evento) => {
+            model.remove({ title: 'unit_api_test_post' }, (err, evento) => {
                 if(err) throw err;
             });
         });
@@ -74,6 +74,7 @@ describe('Listing eventos on api/eventos', () => {
                 "title": "unit_api_test_post",
                 "location": "any location",
                 "start_date": "01 January 1970",
+                "city": "Salvador - BA",
                 "description": "Lorem Ipsum",
                 "producer": "The Producer"
             })
