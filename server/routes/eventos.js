@@ -10,7 +10,7 @@ const router = express.Router();
 router.route('/')
 
     .get((req, res) => {        
-        model.all((err, eventos) => {
+        model.filter((err, eventos) => {
             if(err) throw err;
             res.json(eventos);
         });
@@ -35,14 +35,14 @@ router.route('/')
 router.route('/:id')
 
     .get((req, res) => {                
-        model.filter(req.params.id, (err, evento) => {
+        model.filter({ _id: req.params.id }, (err, evento) => {
             if(err) throw err;
             res.json(evento);
         });
     })
 
     .delete((req, res) => {
-        model.remove(req.params.id, (err, evento) => {
+        model.remove({ _id:req.params.id }, (err, evento) => {
             if(err) throw err;
             res.sendStatus(204);
         });
@@ -65,10 +65,23 @@ router.route('/:id')
 router.route('/name/:slug')
 
     .get((req, res) => {            
-        model.filterBySlug(req.params.slug, (err, user) => {
+        model.filter({ slug: req.params.slug }, (err, user) => {
             if(err) throw err;
             res.json(user);
         });
     })
+
+router.route('/filter')
+
+    .post((req, res, next) => {
+        var filter = req.body;
+
+        model.filter(filter, (err, eventos) => {
+            if(err) throw err;
+            res.json(eventos);
+        });
+
+    });
+
 
 module.exports = router;
