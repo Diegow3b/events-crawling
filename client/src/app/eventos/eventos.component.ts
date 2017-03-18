@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { EventosService } from '../services/eventos.service';
 import { Evento } from '../../../class/evento';
 
 import { DomSanitizer } from '@angular/platform-browser';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 @Component({
     selector: 'app-eventos',
@@ -14,18 +16,27 @@ export class EventosComponent implements OnInit {
     eventos: Evento[];
     eventosQuant: number;
 
+    @ViewChild('input_category')
+    input_category: ElementRef;
+
+    @ViewChild('input_city')
+    input_city: ElementRef;
+
     _id: string;
     title: string;
     location: string;
-    start_date: string;
-    end_date: string;
+    city: string;
+    start_date: any = new Date();
+    end_date: any = new Date();
     slug: string;
     description: string;
     imagem: string;
+    category: string;
 
     defaultImage: string;
 
     constructor(private eventosService: EventosService, private sanitizer: DomSanitizer) {
+
         this.eventosService.getEventos()
             .subscribe(eventos => {
                 this.eventos = eventos;
@@ -50,6 +61,7 @@ export class EventosComponent implements OnInit {
         this.end_date = '';
         this.slug = '';
         this.description = '';
+        this.category = '';
     }
 
     addEvento(event) {
@@ -57,11 +69,13 @@ export class EventosComponent implements OnInit {
         var newEvento = {
             title: this.title,
             location: this.location,
-            start_date: this.start_date,
-            end_date: this.end_date,
+            city: this.city,
+            start_date: this.start_date, /**add as Date */
+            end_date: this.end_date, /**add as Date */
             slug: this.slug,
             description: this.description,
-            imagem: this.imagem
+            imagem: this.imagem,
+            category: this.category
         }
 
         this.eventosService.addEvento(newEvento)
@@ -89,11 +103,13 @@ export class EventosComponent implements OnInit {
             _id: this._id,
             title: this.title,
             location: this.location,
+            city: this.city,
             start_date: this.start_date,
             end_date: this.end_date,
             slug: this.slug,
             description: this.description,
-            imagem: this.imagem
+            imagem: this.imagem,
+            category: this.category
         };
         this.eventosService.updateEvento(_evento)
             .subscribe(data => {
@@ -111,12 +127,37 @@ export class EventosComponent implements OnInit {
         this._id = evento._id;
         this.title = evento.title;
         this.location = evento.location;
-        this.start_date = evento.start_date;
-        this.end_date = evento.end_date;
+        this.city = evento.city;
+        this.start_date = evento.start_date; /**add as Date */
+        this.end_date = evento.end_date; /**add as Date */
         this.description = evento.description;
+        this.category = evento.category;
     }
 
     ngOnInit() {
+      let categoryObservable = Observable.fromEvent(this.input_category.nativeElement, 'keyup');
+      let cityObservable = Observable.fromEvent(this.input_city.nativeElement, 'keyup');
+
+      categoryObservable.subscribe();
+      cityObservable.subscribe();
     }
 
+}
+
+@Pipe({
+  name: 'searchPipe',
+  pure: false
+})
+export class SearchPipe implements PipeTransform {
+  transform(eventos: Evento[], searchKeys: any): any[] {
+      let category = searchKeys.category.toLowerCase();
+      let city = searchKeys.city.toLowerCase();
+
+      if (!eventos) return
+
+      return eventos.filter(item => {
+          return item.category.toLowerCase() == category &&
+                 item.city.toLowerCase() == city;
+      });
+  }
 }

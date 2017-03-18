@@ -3,17 +3,17 @@
     <div class="row">
 
       <div class="col-lg-4">
-        <input class="form-control" type="text" placeholder="Show, música e festa">
+        <input #input_category class="form-control" type="text" placeholder="Show, música e festa">
         <i class="fa fa-search" aria-hidden="true"></i>
       </div>
 
       <div class="col-lg-4">
-        <input class="form-control" type="text" placeholder="Pesquisar por cidade">
+        <input #input_city class="form-control" type="text" placeholder="Pesquisar por cidade">
         <i class="fa fa-location-arrow" aria-hidden="true"></i>
       </div>
 
       <div class="col-lg-2">
-        <div class="searchDate">
+        <div class="searchDate" style="margin-top: -5px;">
 
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span id="searchForData">
@@ -78,30 +78,30 @@
 
       <div id="events-grid">
 
-        <div *ngFor="let evento of eventos">
+        <div *ngFor="let evento of eventos | searchPipe: { category: input_category.value, city: input_city.value }">
           <div class="col-xs-12 col-sm-6 col-md-4 singleEventBox">
             <a class="eventBoxLink" target="blank" *ngIf="evento.imagem != ''" href="#">
               <div class="eventImageBox" *ngIf="evento.imagem"  [style.background-image]="sanitizeSafeStyle(evento.imagem)"></div>
-              <div class="eventImageBox" *ngIf="!evento.imagem" [style.background-image]="sanitizeSafeStyle(defaultImage)"></div>
+              <div class="eventImageBox"0 *ngIf="!evento.imagem" [style.background-image]="sanitizeSafeStyle(defaultImage)"></div>
 
               <div class="eventName">
                 <p>{{evento.title}}</p>
               </div>
               <div class="calendarBox">
-                <div class="calendaMonth">
-                  Mar </div>
+                <div class="calendaMonth" style="text-transform: uppercase;">
+                  {{evento.start_date | date: 'MMM' }} </div>
                 <div class="calendaDay">
-                  17 </div>
+                  {{evento.start_date | date: 'd' }} </div>
               </div>
               <div class="eventLocalBox">
 
                 <div class="uppercase line">
-                  <p>ZERO</p>
+                  <p> {{ evento.location }} </p>
                 </div>
 
                 <div class="line">
-                  <i class="fa fa-clock-o color-grey" style="padding-right: 2px;"></i> 22h
-                  <i class="fa fa-map-marker color-grey" style="padding: 0 2px 0 4px;"></i> {{evento.location}} </div>
+                  <i class="fa fa-clock-o color-grey" style="padding-right: 2px;"></i> {{evento.start_date | date: 'jj' }}
+                  <i class="fa fa-map-marker color-grey" style="padding: 0 2px 0 4px;"></i> {{evento.city}} </div>
               </div>
             </a>
           </div>

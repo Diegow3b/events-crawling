@@ -4,14 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { EventosComponent } from './eventos/eventos.component';
+import { EventosComponent, SearchPipe } from './eventos/eventos.component';
 
 import { EventosService } from './services/eventos.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EventosComponent
+    EventosComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
