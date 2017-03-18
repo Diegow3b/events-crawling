@@ -2,6 +2,14 @@ var mongojs = require('mongojs');
 var db = mongojs('mongodb://admin:123@ds131340.mlab.com:31340/eventos', ['eventos']);
 var slugify = require('slugify');
 
+db.on('error', function (err) {
+    console.log('database error', err)
+})
+ 
+db.on('connect', function () {
+    console.log('database connected')
+})
+
 /**
  * ADD new evento from database
  */
@@ -15,10 +23,11 @@ exports.insert = (evento, callback) => {
 };
 
 /**
- * Obtain all eventos from database
+ * Obtain all or filtered eventos from database
  */
-exports.all = (callback) => {
-    db.eventos.find((err, eventos) => {
+exports.filter = (params, callback) => {
+    if (params._id) params._id = mongojs.ObjectId(params._id)
+    db.eventos.find(params, (err, eventos) => {
         if (err) 
             return callback(err);
         return callback(null, eventos);
@@ -26,54 +35,12 @@ exports.all = (callback) => {
 };
 
 /**
- * Get one evento from database
- */
-exports.filter = (id, callback) => {    
-    db.eventos.findOne({ _id: mongojs.ObjectId(id) },(err, evento) => {
-        if (err) 
-            return callback(err);
-        return callback(null, evento);
-    });
-};
-
-/**
- * Get one evento from database : FILTER - TITLE
- */
-exports.filterByTitle = (title, callback) => {    
-    db.eventos.findOne({ title: title },(err, evento) => {
-        if (err) 
-            return callback(err);
-        return callback(null, evento);
-    });
-};
-
-/**
- * Get one evento from database : FILTER - SLUG
- */
-exports.filterBySlug = (slug, callback) => {    
-    db.eventos.findOne({ slug: slug },(err, evento) => {
-        if (err) 
-            return callback(err);
-        return callback(null, evento);
-    });
-};
-
-/**
  * Remove one object from database 
  */
-exports.remove = (id, callback) => {    
-    db.eventos.remove({ _id: mongojs.ObjectId(id) },(err, evento) => {
-        if (err) 
-            return callback(err);
-        return callback(null, evento);
-    });
-};
-
-/**
- * Remove one object from database 
- */
-exports.removeByTitle = (title, callback) => {    
-    db.eventos.remove({ title: title },(err, evento) => {
+exports.remove = (params, callback) => {
+    if (!params) return
+    if(params._id) params._id = mongojs.ObjectId(params._id) 
+    db.eventos.remove(params,(err, evento) => {
         if (err) 
             return callback(err);
         return callback(null, evento);
