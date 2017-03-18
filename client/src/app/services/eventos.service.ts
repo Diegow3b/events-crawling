@@ -14,6 +14,14 @@ export class EventosService {
           .map(res => res.json());
   }
 
+  filterEvento(filterObj){
+      var headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      console.log(filterObj);
+      return this.http.post('http://localhost:3000/api/eventos/filter', JSON.stringify(filterObj), { headers: headers })
+          .map(res => res.json());
+  }
+
   addEvento(newEvento) {
       var headers = new Headers();
       headers.append('Content-Type', 'application/json');
