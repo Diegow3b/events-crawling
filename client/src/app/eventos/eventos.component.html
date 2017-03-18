@@ -2,40 +2,45 @@
   <div class="container" style="padding: 0 57px;">
     <div class="row">
 
-      <div class="col-lg-4">
-        <input #input_category class="form-control" type="text" placeholder="Show, música e festa">
-        <i class="fa fa-search" aria-hidden="true"></i>
-      </div>
 
-      <div class="col-lg-4">
-        <input #input_city class="form-control" type="text" placeholder="Pesquisar por cidade">
-        <i class="fa fa-location-arrow" aria-hidden="true"></i>
-      </div>
-
-      <div class="col-lg-2">
-        <div class="searchDate" style="margin-top: -5px;">
-
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span id="searchForData">
-                Todas as datas
-              </span>
-          </button>
-          <ul class="dropdown-menu" id="dropdownMenuDates">
-              <li><a data-period="">Todas as datas</a></li>
-              <li><a data-period="hoje">Hoje</a></li>
-              <li><a data-period="amanha">Amanhã</a></li>
-              <li><a data-period="esta-semana">Esta semana</a></li>
-              <li><a data-period="este-fim-de-semana">Este fim de semana</a></li>
-              <li><a data-period="proxima-semana">Próxima semana</a></li>
-              <li><a data-period="este-mes">Este mês</a></li>
-          </ul>
-
-          <i class="fa fa-caret-down" aria-hidden="true"></i>
+      <form (submit)="filterEvents($event)">
+        <div class="col-lg-4">
+          <input [(ngModel)]="categoryFilter" [ngModelOptions]="{standalone: true}" class="form-control" type="text" placeholder="Show, música e festa">
+          <i class="fa fa-search" aria-hidden="true"></i>
         </div>
-      </div>
-      <div class="col-lg-2">
-        <input type="submit" class="btn btn-danger search-input" value="PROCURAR">
-      </div>
+
+        <div class="col-lg-4">
+          <input [(ngModel)]="cityFilter" [ngModelOptions]="{standalone: true}" class="form-control" type="text" placeholder="Pesquisar por cidade" style="border-left: 0;">
+          <i class="fa fa-location-arrow" aria-hidden="true"></i>
+        </div>
+
+        <div class="col-lg-2">
+          <div class="searchDate" style="margin-top: -5px;">
+
+            <input type="hidden" [value]="dateFilter" id="dateFilter" name="dateFilter">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span id="searchForData">
+                  Todas as datas
+                </span>
+            </button>
+            <ul class="dropdown-menu" id="dropdownMenuDates">
+                <li><a (click)="setDateFilter($event)" value="">Todas as datas</a></li>
+                <li><a (click)="setDateFilter($event)" value="hoje">Hoje</a></li>
+                <li><a (click)="setDateFilter($event)" value="amanha">Amanhã</a></li>
+                <li><a (click)="setDateFilter($event)" value="esta-semana">Esta semana</a></li>
+                <li><a (click)="setDateFilter($event)" value="este-fim-de-semana">Este fim de semana</a></li>
+                <li><a (click)="setDateFilter($event)" value="proxima-semana">Próxima semana</a></li>
+                <li><a (click)="setDateFilter($event)" value="este-mes">Este mês</a></li>
+            </ul>
+
+            <i class="fa fa-caret-down" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <input type="submit" class="btn btn-danger search-input" value="PROCURAR">
+        </div>
+      </form>
+
 
     </div>
   </div>
@@ -78,7 +83,8 @@
 
       <div id="events-grid">
 
-        <div *ngFor="let evento of eventos | searchPipe: { category: input_category.value, city: input_city.value }">
+        <!--<div *ngFor="let evento of eventos | searchPipe: { category: input_category.value, city: input_city.value }">-->
+        <div *ngFor="let evento of eventos">
           <div class="col-xs-12 col-sm-6 col-md-4 singleEventBox">
             <a class="eventBoxLink" target="blank" *ngIf="evento.imagem != ''" href="#">
               <div class="eventImageBox" *ngIf="evento.imagem"  [style.background-image]="sanitizeSafeStyle(evento.imagem)"></div>
