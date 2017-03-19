@@ -37,6 +37,8 @@ export class EventosComponent implements OnInit {
     cityFilter: string;
     categoryFilter: string;
 
+    dateFilterLabel: string;
+
     locationEventFilter: string;
 
     defaultImage: string;
@@ -47,35 +49,105 @@ export class EventosComponent implements OnInit {
 
         this.defaultImage = 'https://d1gkntzr8mxq7s.cloudfront.net/58c9e8b1161a2-xs.jpg';
         this.locationEventFilter = "All";
+        this.dateFilterLabel = "All Dates"
     }
 
     sanitizeSafeStyle(url: string) {
-        if(url) {
+        if (url) {
             return this.sanitizer.bypassSecurityTrustStyle('url(' + url + ')');
         } else {
             return null;
         }
     }
 
-    filterEvents(){
-      event.preventDefault();
-      var filter = {
-          category: this.categoryFilter,
-          city: this.cityFilter,
-          date: this.dateFilter
-      }
+    updateListByDates(listDates: Array<any>, startDay: number, endDay: number, day:number, date:any){
+        let i = 0;
 
-      this.eventosService.filterEvento(filter)
+        while (day <= 6) {
+            day = date.getDay() + i;
+            if (day === startDay || day === endDay) {
+                date.setDate(date.getDate() + day);
+                listDates.push(new Date(date.valueOf()));
+            }
+            i++;
+        }
+
+        return listDates;
+    }
+
+    convertDateFilter(dateString: string) {
+        let listDate = [];
+
+        let date = new Date();
+        let day = date.getDay();
+
+        if (dateString) {
+            dateString = dateString.toLowerCase(); // Sanity Check
+        }
+
+        switch (dateString) {
+            case "today":
+                listDate.push(date);
+                break;
+            case "tomorrow":
+                date.setDate(date.getDate() + 1);
+                listDate.push(new Date(date.valueOf()));
+                break;
+            case "this-week":
+                /**
+                 * Day 1 = Monday
+                 * Day 5 = Friday
+                 */
+                day = 0; // Reseting the Week
+                listDate = this.updateListByDates(listDate, 1, 5, day, date)
+                break;
+            case "this-weekend":
+                /** Brazil format (Saturday and Sunday is Weekend)
+                 * Day 0 = Sunday
+                 * Day 6 = Saturday
+                 */
+                listDate = this.updateListByDates(listDate, 0, 6, day, date)
+                break;
+            case "next-week":
+                day = 0;
+                date.setDate(date.getDate() +7);
+                listDate = this.updateListByDates(listDate, 1, 5, day, date)
+                break;
+            case "this-month":
+                /**
+                 * Getting the first and last day of month
+                 */
+                var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+                var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+                listDate.push(firstDay, lastDay);
+                break;
+        }
+
+        return listDate;
+    }
+
+    filterEvents() {
+        event.preventDefault();
+        let dateString = this.dateFilter;
+        var filter = {
+            category: this.categoryFilter,
+            city: this.cityFilter,
+            date: this.convertDateFilter(dateString)
+        }
+
+
+        this.eventosService.filterEvento(filter)
             .subscribe(eventos => {
                 this.eventos = eventos;
-                if(eventos) this.eventosQuant = eventos.length;
+                if (eventos) this.eventosQuant = eventos.length;
                 this.locationEventFilter = this.cityFilter;
             });
 
     }
 
-    setDateFilter(event){
-      this.dateFilter = event.target.attributes[1].value
+    setDateFilter(event) {
+        this.dateFilter = event.target.attributes[1].value
+        this.dateFilterLabel = event.target.innerHTML;
     }
 
     limparForm() {
@@ -88,7 +160,7 @@ export class EventosComponent implements OnInit {
         this.category = '';
     }
 
-    getAllEventos(){
+    getAllEventos() {
         this.eventosService.getEventos()
             .subscribe(eventos => {
                 this.eventos = eventos;
@@ -167,11 +239,11 @@ export class EventosComponent implements OnInit {
     }
 
     ngOnInit() {
-      // let categoryObservable = Observable.fromEvent(this.input_category.nativeElement, 'keyup');
-      // let cityObservable = Observable.fromEvent(this.input_city.nativeElement, 'keyup');
+        // let categoryObservable = Observable.fromEvent(this.input_category.nativeElement, 'keyup');
+        // let cityObservable = Observable.fromEvent(this.input_city.nativeElement, 'keyup');
 
-      // categoryObservable.subscribe();
-      // cityObservable.subscribe();
+        // categoryObservable.subscribe();
+        // cityObservable.subscribe();
     }
 
 }
