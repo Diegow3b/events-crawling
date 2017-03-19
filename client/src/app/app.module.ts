@@ -10,12 +10,14 @@ import { routes } from './app.router';
 import { AppComponent } from './app.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { LoginComponent } from './login/login.component';
+import { EventosDetailComponent } from './eventos-detail/eventos-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventosComponent,
-    LoginComponent
+    LoginComponent,
+    EventosDetailComponent
     // SearchPipe
   ],
   imports: [

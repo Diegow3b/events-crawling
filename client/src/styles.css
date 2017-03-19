@@ -108,6 +108,13 @@ li.btn-fill-white, .btn-fill-white a {
     background: #fff !important;
 }
 
+.btn-dark-transparent, a.btn-dark-transparent, a.btn-dark-transparent:visited {
+    background: none;
+    color: #50525f !important;
+}
+
+/** END BUTTONS **/
+
 /** FOTER **/
 
 .footer a, .footer a:link, .footer a:visited {

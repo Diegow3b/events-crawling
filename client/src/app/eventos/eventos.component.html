@@ -86,7 +86,7 @@
         <!--<div *ngFor="let evento of eventos | searchPipe: { category: input_category.value, city: input_city.value }">-->
         <div *ngFor="let evento of eventos">
           <div class="col-xs-12 col-sm-6 col-md-4 singleEventBox">
-            <a class="eventBoxLink" target="blank" *ngIf="evento.imagem != ''" href="#">
+            <a class="eventBoxLink" [routerLink]="['/events-detail', evento._id]">
               <div class="eventImageBox" *ngIf="evento.imagem"  [style.background-image]="sanitizeSafeStyle(evento.imagem)"></div>
               <div class="eventImageBox"0 *ngIf="!evento.imagem" [style.background-image]="sanitizeSafeStyle(defaultImage)"></div>
 
