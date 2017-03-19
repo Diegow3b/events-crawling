@@ -20,7 +20,7 @@
             <input type="hidden" [value]="dateFilter" id="dateFilter" name="dateFilter">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span id="searchForData">
-                  All Dates
+                  {{ dateFilterLabel }}
                 </span>
             </button>
             <ul class="dropdown-menu" id="dropdownMenuDates">
@@ -30,7 +30,7 @@
                 <li><a (click)="setDateFilter($event)" value="this-week">This Week</a></li>
                 <li><a (click)="setDateFilter($event)" value="this-weekend">This Weekend</a></li>
                 <li><a (click)="setDateFilter($event)" value="next-week">Next Week</a></li>
-                <li><a (click)="setDateFilter($event)" value="this-month">This month</a></li>
+                <li><a (click)="setDateFilter($event)" value="this-month">This Month</a></li>
             </ul>
 
             <i class="fa fa-caret-down" aria-hidden="true"></i>
