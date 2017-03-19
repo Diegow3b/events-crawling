@@ -37,6 +37,8 @@ export class EventosComponent implements OnInit {
     cityFilter: string;
     categoryFilter: string;
 
+    locationEventFilter: string;
+
     defaultImage: string;
 
     constructor(private eventosService: EventosService, private sanitizer: DomSanitizer) {
@@ -44,6 +46,7 @@ export class EventosComponent implements OnInit {
         this.getAllEventos();
 
         this.defaultImage = 'https://d1gkntzr8mxq7s.cloudfront.net/58c9e8b1161a2-xs.jpg';
+        this.locationEventFilter = "All";
     }
 
     sanitizeSafeStyle(url: string) {
@@ -66,8 +69,7 @@ export class EventosComponent implements OnInit {
             .subscribe(eventos => {
                 this.eventos = eventos;
                 if(eventos) this.eventosQuant = eventos.length;
-                console.log("Returning");
-                console.log(eventos);
+                this.locationEventFilter = this.cityFilter;
             });
 
     }
