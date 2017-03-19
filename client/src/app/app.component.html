@@ -8,8 +8,7 @@
         </div>
       </div>
       <div class="col-xs-4 col-md-3 col-lg-2 logo">
-        <!--<a class="navbar-brand" href="#">Eventos</a>-->
-        <a href="/home/">
+        <a routerLink="events">
             <img src="../src/static/logo.png" alt="logo Angular" class="logo">
         </a>
       </div>
@@ -17,10 +16,12 @@
       <div class="hidden-xs col-xs-8 col-sm-8 col-md-5 col-lg-3">
         <nav class="navbar nav">
           <ul class="nav navbar-nav">
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Sobre</a></li>
-            <li><a href="#">Contato</a></li>
-            <li class="btn-outline btn-fill-white"><a class="publishEvent" href="#">+Publicar evento</a></li>
+            <li><a routerLink="login">Login</a></li>
+            <li><a routerLink="about">About</a></li>
+            <li><a routerLink="contact">Contact</a></li>
+            <li class="btn-outline btn-fill-white">
+                <a routerLink="events" class="publishEvent" >+Publicar evento</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -44,7 +45,9 @@
   </div>
 </header>
 <div class="container-fluid" style="padding-top: 73px">
-  <app-eventos></app-eventos>
+
+  <!--<app-eventos></app-eventos>-->
+  <router-outlet></router-outlet>
 
   <section id="asked-questions" class="section-gray">
 
