@@ -27,6 +27,17 @@ exports.insert = (evento, callback) => {
  */
 exports.filter = (params, callback) => {
     if (params._id) params._id = mongojs.ObjectId(params._id)
+    if (params.date){
+        if ( params.date.length > 1){
+            params.start_date = { $gte: params.date[0] };
+            params.end_date = { $lte: params.date[1] };
+        }else{
+            params.start_date = params.date[0];
+        }        
+
+        delete params.date
+    }
+
     db.eventos.find(params, (err, eventos) => {
         if (err) 
             return callback(err);
