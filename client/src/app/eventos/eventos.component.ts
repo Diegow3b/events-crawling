@@ -60,6 +60,18 @@ export class EventosComponent implements OnInit {
         }
     }
 
+    sortByDate ( path = [] , comparator = (a: any, b: any) => new Date().getTime() - new Date().getTime()) {
+        return (a, b) => {
+            let _a = a
+            let _b = b
+            for(let key of path) {
+            _a = _a[key]
+            _b = _b[key]
+            }
+            return comparator(_a, _b)
+        }
+    }
+
     updateListByDates(listDates: Array<any>, startDay: number, endDay: number, day:number, date:any){
         let i = 0;
 
@@ -126,6 +138,13 @@ export class EventosComponent implements OnInit {
         return listDate;
     }
 
+    sanityCheck(filter){
+        if (!filter.category) delete filter.category;
+        if (!filter.city) delete filter.city;
+        if (filter.date.length === 0) delete filter.date;
+        return filter
+    }
+
     filterEvents() {
         event.preventDefault();
         let dateString = this.dateFilter;
@@ -135,12 +154,16 @@ export class EventosComponent implements OnInit {
             date: this.convertDateFilter(dateString)
         }
 
+        this.sanityCheck(filter);
 
+        console.log(filter);
         this.eventosService.filterEvento(filter)
             .subscribe(eventos => {
                 this.eventos = eventos;
                 if (eventos) this.eventosQuant = eventos.length;
                 this.locationEventFilter = this.cityFilter;
+                // console.log(eventos);
+                // console.log(eventos.sort(this.sortByDate([ 'start_date' ])));
             });
 
     }
