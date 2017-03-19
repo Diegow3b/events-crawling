@@ -60,19 +60,29 @@ export class EventosComponent implements OnInit {
         }
     }
 
-    sortByDate ( path = [] , comparator = (a: any, b: any) => new Date().getTime() - new Date().getTime()) {
-        return (a, b) => {
-            let _a = a
-            let _b = b
-            for(let key of path) {
-            _a = _a[key]
-            _b = _b[key]
-            }
-            return comparator(_a, _b)
+    _sortByDate ( path = [], order = "asc" , comparator = (a: any, b: any, order:string) => {
+        switch (order) {
+            case "asc":
+                return new Date(a).getTime() - new Date(b).getTime();
+
+            case "desc":
+                return new Date(a).getTime() + new Date(b).getTime();
         }
+        }) {
+            return (a, b) => {
+                let _a = a
+                let _b = b
+                for(let key of path) {
+                    _a = _a[key]
+                    _b = _b[key]
+                }
+                return comparator(_a, _b, order)
+
+            }
     }
 
-    updateListByDates(listDates: Array<any>, startDay: number, endDay: number, day:number, date:any){
+
+    _updateListByDates(listDates: Array<any>, startDay: number, endDay: number, day:number, date:any){
         let i = 0;
 
         while (day <= 6) {
@@ -111,19 +121,19 @@ export class EventosComponent implements OnInit {
                  * Day 5 = Friday
                  */
                 day = 0; // Reseting the Week
-                listDate = this.updateListByDates(listDate, 1, 5, day, date)
+                listDate = this._updateListByDates(listDate, 1, 5, day, date)
                 break;
             case "this-weekend":
                 /** Brazil format (Saturday and Sunday is Weekend)
                  * Day 0 = Sunday
                  * Day 6 = Saturday
                  */
-                listDate = this.updateListByDates(listDate, 0, 6, day, date)
+                listDate = this._updateListByDates(listDate, 0, 6, day, date)
                 break;
             case "next-week":
                 day = 0;
                 date.setDate(date.getDate() +7);
-                listDate = this.updateListByDates(listDate, 1, 5, day, date)
+                listDate = this._updateListByDates(listDate, 1, 5, day, date)
                 break;
             case "this-month":
                 /**
@@ -138,7 +148,7 @@ export class EventosComponent implements OnInit {
         return listDate;
     }
 
-    sanityCheck(filter){
+    _sanityCheck(filter){
         if (!filter.category) delete filter.category;
         if (!filter.city) delete filter.city;
         if (filter.date.length === 0) delete filter.date;
@@ -154,18 +164,27 @@ export class EventosComponent implements OnInit {
             date: this.convertDateFilter(dateString)
         }
 
-        this.sanityCheck(filter);
+        this._sanityCheck(filter);
 
         console.log(filter);
         this.eventosService.filterEvento(filter)
             .subscribe(eventos => {
-                this.eventos = eventos;
+                this.eventos = eventos.sort(this._sortByDate([ 'start_date' ]));
                 if (eventos) this.eventosQuant = eventos.length;
-                this.locationEventFilter = this.cityFilter;
-                // console.log(eventos);
-                // console.log(eventos.sort(this.sortByDate([ 'start_date' ])));
+                if (this.cityFilter) this.locationEventFilter = this.cityFilter;
             });
 
+    }
+
+    _DateSelectonChange(value){
+        switch(value) {
+            case "date":
+                this.eventos = this.eventos.sort(this._sortByDate([ 'start_date' ]));
+                break;
+            case "relevance":
+                this.eventos = this.eventos.sort(this._sortByDate([ 'start_date' ], "desc"));
+                break;
+        }
     }
 
     setDateFilter(event) {
@@ -186,7 +205,7 @@ export class EventosComponent implements OnInit {
     getAllEventos() {
         this.eventosService.getEventos()
             .subscribe(eventos => {
-                this.eventos = eventos;
+                this.eventos = eventos.sort(this._sortByDate([ 'start_date' ]));
                 this.eventosQuant = eventos.length;
             });
     }

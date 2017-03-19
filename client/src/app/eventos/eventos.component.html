@@ -64,9 +64,9 @@
             <div class="form-group">
               <label class="control-label"><strong>Order By:</strong></label>
               <div class="selectContainer">
-                <select name="orderBy" class="form-control">
-                  <option value="data" selected>Date</option>
-                  <option value="relevancia">Relevance</option>
+                <select name="orderBy" class="form-control" (change)="_DateSelectonChange($event.target.value)">
+                  <option value="date" selected>Date</option>
+                  <option value="Relevance">Relevance</option>
                 </select>
               </div>
               <i class="fa fa-caret-down" aria-hidden="true"></i>

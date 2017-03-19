@@ -38,7 +38,7 @@ exports.filter = (params, callback) => {
         delete params.date
     }
 
-    db.eventos.find(params, (err, eventos) => {
+    db.eventos.find(params,(err, eventos) => {
         if (err) 
             return callback(err);
         return callback(null, eventos);
