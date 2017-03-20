@@ -8,4 +8,5 @@ export class Evento{
   slug: string;
   description: string;
   category: string;
+  producer: string;
 }
