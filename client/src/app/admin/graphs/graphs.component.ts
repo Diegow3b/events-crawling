@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { cubeGraph } from '../../../../class/cube';
+import { EventosService } from '../../services/eventos.service';
+import { Evento } from '../../../../class/evento';
 
 @Component({
     selector: 'app-graphs',
@@ -8,12 +10,24 @@ import { cubeGraph } from '../../../../class/cube';
 })
 export class GraphsComponent implements OnInit {
 
-    @Input() cubes: cubeGraph[];
+    eventos: Evento[];
+    cubes: cubeGraph[];
 
-    constructor() {
+    constructor(private eventosService: EventosService) {
+        this.cubes = new Array();
     }
 
     ngOnInit() {
+        this.getAllEventosAdmin();
+        this.cubes.push(new cubeGraph("Eventos", 35, 'aqua', 'ion-calendar'));
+        this.cubes.push(new cubeGraph("Users", 75, 'yellow', 'ion-person-stalker'));
+    }
+
+    getAllEventosAdmin() {
+        this.eventosService.getEventos()
+            .subscribe(eventos => {
+                this.eventos = eventos;
+            });
     }
 
 }
