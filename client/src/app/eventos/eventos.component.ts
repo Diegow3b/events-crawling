@@ -14,13 +14,7 @@ import 'rxjs/Rx';
 export class EventosComponent implements OnInit {
 
     eventos: Evento[];
-    eventosQuant: number;
-
-    // @ViewChild('input_category')
-    // input_category: ElementRef;
-
-    // @ViewChild('input_city')
-    // input_city: ElementRef;
+    eventosAmount: number;
 
     _id: string;
     title: string;
@@ -170,7 +164,7 @@ export class EventosComponent implements OnInit {
         this.eventosService.filterEvento(filter)
             .subscribe(eventos => {
                 this.eventos = eventos.sort(this._sortByDate([ 'start_date' ]));
-                if (eventos) this.eventosQuant = eventos.length;
+                if (eventos) this.eventosAmount = eventos.length;
                 if (this.cityFilter) this.locationEventFilter = this.cityFilter;
             });
 
@@ -206,7 +200,7 @@ export class EventosComponent implements OnInit {
         this.eventosService.getEventos()
             .subscribe(eventos => {
                 this.eventos = eventos.sort(this._sortByDate([ 'start_date' ]));
-                this.eventosQuant = eventos.length;
+                this.eventosAmount = eventos.length;
             });
     }
 
