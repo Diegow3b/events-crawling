@@ -12,12 +12,17 @@ import { EventosComponent } from './eventos/eventos.component';
 import { LoginComponent } from './login/login.component';
 import { EventosDetailComponent } from './eventos-detail/eventos-detail.component';
 
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { GraphsComponent } from './admin/graphs/graphs.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     EventosComponent,
     LoginComponent,
-    EventosDetailComponent
+    EventosDetailComponent,
+    DashboardComponent,
+    GraphsComponent
     // SearchPipe
   ],
   imports: [
