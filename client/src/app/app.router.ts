@@ -10,6 +10,8 @@ import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { GraphsComponent } from './admin/graphs/graphs.component';
 import { EventosListComponent } from './admin/eventos/eventos-list/eventos-list.component';
+import { EventosAddComponent } from './admin/eventos/eventos-add/eventos-add.component';
+import { EventosEditComponent } from './admin/eventos/eventos-edit/eventos-edit.component';
 
 export const router: Routes = [
     { path: '', redirectTo: 'events', pathMatch: 'full' },
@@ -22,7 +24,9 @@ export const router: Routes = [
     { path: 'admin', component: AdminComponent, children: [
         { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
         { path: 'dashboard', component: DashboardComponent },
-        { path: 'events/list', component: EventosListComponent }
+        { path: 'events', component: EventosListComponent },
+        { path: 'events/add', component: EventosAddComponent },
+        { path: 'events/edit', component: EventosEditComponent }
     ]},
 
 ];
