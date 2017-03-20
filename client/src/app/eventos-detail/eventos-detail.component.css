@@ -14,7 +14,8 @@ h1, h2, h3 {
 
 .banner {
     height: 444px;
-    width: 100%;
+    /*width: 100%;*/
+    width: 1170px;
     min-height: 305px;
     max-height: 406px;
 }
@@ -98,4 +99,42 @@ h1, h2, h3 {
 
 .producer-section {
     padding-left: 30px;
+}
+
+@media screen and (max-width: 1025px) {
+    .banner { width: 100% };
+}
+
+@media screen and (max-width: 769px) {
+    .banner { width: 95% };
+}
+
+@media screen and (max-width: 426px) {
+    .banner {
+        /*height: 117px;*/
+        width: 100%;
+        min-height: 110px;
+        max-height: 117px;
+        background-size: 100%;
+    };
+}
+
+@media screen and (max-width: 376px) {
+    .banner {
+        /*height: 117px;*/
+        width: 100%;
+        min-height: 100px;
+        max-height: 105px;
+        background-size: 100%;
+    };
+}
+
+@media screen and (max-width: 321px) {
+    .banner {
+        /*height: 117px;*/
+        width: 100%;
+        min-height: 80px;
+        max-height: 90px;
+        background-size: 100%;
+    };
 }

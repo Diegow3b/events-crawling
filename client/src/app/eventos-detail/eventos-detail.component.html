@@ -4,7 +4,7 @@
         <div class="banner" *ngIf="evento?.imagem" [style.background-image]="sanitizeSafeStyle(evento.imagem)"></div>
         <div class="banner" *ngIf="!evento?.imagem" [style.background-image]="sanitizeSafeStyle(defaultImage)"></div>
 
-        <div class="container border-left border-right" style="margin-bottom: 30px;" id="info">
+        <div class="container border-left border-right" style="padding-bottom: 30px;" id="info">
             <div class="">
                 <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
                     <h1 class="uppercase">{{ evento?.title }}</h1>
