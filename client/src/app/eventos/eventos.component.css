@@ -260,3 +260,16 @@ select.form-control {
   border-color: #1ab6f0;
   color: #fff;
 }
+
+@media screen and (max-width: 1025px) {
+    .header-evento:first-child {
+        position: relative;
+        top: 98px;
+    };
+}
+
+@media screen and (max-width: 321px) {
+    .header-evento h3 {
+        font-size: 1.4em;
+    };
+}
