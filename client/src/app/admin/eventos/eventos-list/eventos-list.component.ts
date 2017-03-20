@@ -3,11 +3,11 @@ import { EventosService } from '../../../services/eventos.service';
 import { Evento } from '../../../../../class/evento';
 
 @Component({
-    selector: 'app-eventoslist',
-    templateUrl: './eventoslist.component.html',
-    styleUrls: ['./eventoslist.component.css']
+  selector: 'app-eventos-list',
+  templateUrl: './eventos-list.component.html',
+  styleUrls: ['./eventos-list.component.css']
 })
-export class EventoslistComponent implements OnInit {
+export class EventosListComponent implements OnInit {
 
     eventos: Evento[];
     eventosAmount: number;

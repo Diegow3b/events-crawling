@@ -15,7 +15,8 @@ import { EventosDetailComponent } from './eventos-detail/eventos-detail.componen
 import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { GraphsComponent } from './admin/graphs/graphs.component';
-import { EventoslistComponent } from './admin/eventos/eventoslist/eventoslist.component';
+import { EventosAddComponent } from './admin/eventos/eventos-add/eventos-add.component';
+import { EventosListComponent } from './admin/eventos/eventos-list/eventos-list.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { EventoslistComponent } from './admin/eventos/eventoslist/eventoslist.co
     DashboardComponent,
     GraphsComponent,
     AdminComponent,
-    EventoslistComponent
+    EventosAddComponent,
+    EventosListComponent
     // SearchPipe
   ],
   imports: [
