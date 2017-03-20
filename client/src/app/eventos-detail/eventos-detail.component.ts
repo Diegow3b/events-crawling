@@ -20,7 +20,7 @@ export class EventosDetailComponent implements OnInit, OnDestroy {
     private sub: any;
 
     constructor(private eventosService: EventosService, private sanitizer: DomSanitizer, private route: ActivatedRoute) {
-        this.defaultImage = 'https://d1gkntzr8mxq7s.cloudfront.net/58c9e8b1161a2-xs.jpg';
+        this.defaultImage = '../../src/static/admin/img/mean.jpeg';
     }
 
     sanitizeSafeStyle(url: string) {
@@ -35,7 +35,10 @@ export class EventosDetailComponent implements OnInit, OnDestroy {
         if(!_id) return;
         this.eventosService.filterEvento({ _id: _id })
             .subscribe(evento => {
+                if (!evento.imagem) delete evento.imagem;
                 if (evento.length == 1) this.evento = evento[0];
+                console.log(evento);
+                // this.evento.description = this.evento.description.trim();
             });
 
     }

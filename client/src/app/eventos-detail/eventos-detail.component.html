@@ -41,10 +41,7 @@
         <div class="container border-top border-left border-right event-section" style="padding-bottom: 43px;" id="descricao">
             <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12" id="event-txt">
                 <i class="fa fa-align-left icon-left" aria-hidden="true"></i>
-                <h3 id="description">Event Description</h3>
-                <font face="Arial, Verdana"><span style="font-size: 10pt;">{{ evento?.title }}</span></font>
-                <div style="font-family: Arial, Verdana; font-size: 10pt; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal;">{{ evento?.start_date | date:'MMMM/y' }}</div>
-                <div style="font-family: Arial, Verdana; font-size: 10pt; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal;"><br></div>
+                <h3 class="title-description">Event Description</h3>
                 <div>
                     <font face="Arial, Verdana">
                         <span style="font-size: 13.3333px;">
@@ -77,9 +74,9 @@
             <div class="col-md-7 col-xs-12">
                 <h4 class="kill-top-margin text-center-xs text-left-md">{{ evento?.producer }}</h4>
                 <div class="padding-top-20" style="margin-top: 29px;">
-                    <a href="javascript:;" onclick="contactOrg();" data-color="#00aeef" class="btn btn-dark-transparent btn-outline contact-org-btn ripple"
+                    <a href="#" onclick="contactOrg();" data-color="#00aeef" class="btn btn-dark-transparent btn-outline contact-org-btn ripple"
                         style="position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span style="position: relative; z-index: 2;"><i class="fa fa-envelope-o"></i> Fale com o produtor</span><span class="rippleWrap" style="position: absolute; z-index: 1; left: 0px; top: 0px; overflow: hidden; border-radius: 4px; opacity: 1; transition: none;"><span class="rippleAnimate" style="position: absolute; left: 0px; top: 0px; width: 0px; height: 0px; border-radius: 50%; background-color: rgb(0, 174, 239); transform: scale3d(0, 0, 1); transition: none;"></span></span></a>
-                    <a href="http://www.sympla.com.br/blissemsalvador" target="_blank" class="btn btn-dark-transparent btn-outline btn-whitespace-normal contact-org-btn ripple"
+                    <a href="#" target="_blank" class="btn btn-dark-transparent btn-outline btn-whitespace-normal contact-org-btn ripple"
                         data-color="#00aeef" style="position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span style="position: relative; z-index: 2;"><i class="fa fa-calendar"></i> Mais eventos deste produtor</span>
                         <span
                             class="rippleWrap" style="position: absolute; z-index: 1; left: 0px; top: 0px; overflow: hidden; border-radius: 4px; opacity: 1; transition: none;"><span class="rippleAnimate" style="position: absolute; left: 0px; top: 0px; width: 0px; height: 0px; border-radius: 50%; background-color: rgb(0, 174, 239); transform: scale3d(0, 0, 1); transition: none;"></span></span>

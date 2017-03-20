@@ -101,6 +101,11 @@ h1, h2, h3 {
     padding-left: 30px;
 }
 
+#descricao span{
+    white-space: pre-line;
+}
+
+
 @media screen and (max-width: 1025px) {
     .banner { width: 100% };
 }
