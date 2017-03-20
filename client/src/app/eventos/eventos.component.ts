@@ -41,7 +41,7 @@ export class EventosComponent implements OnInit {
 
         this.getAllEventos();
 
-        this.defaultImage = 'https://d1gkntzr8mxq7s.cloudfront.net/58c9e8b1161a2-xs.jpg';
+        this.defaultImage = '../../src/static/admin/img/mean.jpeg';
         this.locationEventFilter = "All";
         this.dateFilterLabel = "All Dates"
     }
