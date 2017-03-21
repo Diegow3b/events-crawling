@@ -37,7 +37,7 @@
                             </thead>
                             <tbody>
                                 <tr role="row" class="odd" *ngFor="let evento of eventos">
-                                    <td class="sorting_1"><a routerLink="edit">{{ evento?.title }}</a></td>
+                                    <td class="sorting_1"><a [routerLink]="['edit/', evento._id]">{{ evento?.title }}</a></td>
                                     <td>{{ evento?.location }}</td>
                                     <td>{{ evento?.city }}</td>
                                     <td>{{ evento?.start_date | date: 'fullDate' }} at {{ evento?.start_date | date: 'H' }}h</td>
