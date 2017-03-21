@@ -38,7 +38,6 @@ export class EventosDetailComponent implements OnInit, OnDestroy {
                 if (!evento.imagem) delete evento.imagem;
                 if (evento.length == 1) this.evento = evento[0];
                 console.log(evento);
-                // this.evento.description = this.evento.description.trim();
             });
 
     }

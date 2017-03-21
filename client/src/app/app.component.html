@@ -2,10 +2,10 @@
   <div class="navbar navbar-fixed-top box app-header">
     <div class="row">
       <div class="col-xs-5 visible-lg">
-        <div class="input-group input-search" id="input-search-navbar">
+        <!--<div class="input-group input-search" id="input-search-navbar">
           <i class="fa fa-search"></i>
           <input #input_category type="text" class="form-control" placeholder="Digite ou selecione uma categoria" id="tags" name="tags" autocomplete="off">
-        </div>
+        </div>-->
       </div>
       <div class="col-xs-4 col-md-3 col-lg-2 logo">
         <a routerLink="events">
@@ -16,12 +16,13 @@
       <div class="hidden-xs col-xs-8 col-sm-8 col-md-5 col-lg-3">
         <nav class="navbar nav">
           <ul class="nav navbar-nav">
-            <li><a routerLink="admin">Admin</a></li>
+            <li><a routerLink="events">Home</a></li>
             <li><a routerLink="login">Login</a></li>
-            <!--<li><a routerLink="about">About</a></li>-->
+            <li><a routerLink="admin">Admin</a></li>
+            <li><a routerLink="about">About</a></li>
             <!--<li><a routerLink="contact">Contact</a></li>-->
             <li class="btn-outline btn-fill-white">
-                <a routerLink="events" class="publishEvent" >+Publicar evento</a>
+                <a routerLink="admin/events/add" class="publishEvent" >+Publish Event</a>
             </li>
           </ul>
         </nav>

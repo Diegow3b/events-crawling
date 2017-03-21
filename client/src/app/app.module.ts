@@ -10,6 +10,7 @@ import { routes } from './app.router';
 import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 
 import { AppComponent } from './app.component';
+import { AboutComponent } from './about/about.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { LoginComponent } from './login/login.component';
 import { EventosDetailComponent } from './eventos-detail/eventos-detail.component';
@@ -20,6 +21,7 @@ import { GraphsComponent } from './admin/graphs/graphs.component';
 import { EventosAddComponent } from './admin/eventos/eventos-add/eventos-add.component';
 import { EventosListComponent } from './admin/eventos/eventos-list/eventos-list.component';
 import { EventosEditComponent } from './admin/eventos/eventos-edit/eventos-edit.component';
+
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import { EventosEditComponent } from './admin/eventos/eventos-edit/eventos-edit.
     AdminComponent,
     EventosAddComponent,
     EventosListComponent,
-    EventosEditComponent
+    EventosEditComponent,
+    AboutComponent
     // SearchPipe
   ],
   imports: [
