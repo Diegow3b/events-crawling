@@ -3,6 +3,12 @@ Small Project about Find Events
 
 # MEAN STACK (Mongo, Express, Angular and Node)
 
+Obs.: If you are creating a new enviroment at heroku you should use:
+```shell
+heroku config:set -a evento-portal-frontend NODE_ENV=production
+heroku config:set -a evento-portal-backend NODE_ENV=production
+```
+
 ## Dependencies
 TODO
 
